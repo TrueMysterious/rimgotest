@@ -26,7 +26,7 @@
     <p>{{album.CreatedAt}}</p>
 
     <div class="imageMeta__wrapper">
-      {{#if album.User}}
+      {{#if album.User.Username}}
       <div class="user">
         <a href="/user/{{album.User.Username}}">
           <img src="{{album.User.Avatar}}" class="pfp" width="36" height="36" loading="lazy" />
