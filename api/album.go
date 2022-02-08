@@ -27,7 +27,7 @@ func FetchAlbum(albumID string) (types.Album, error) {
 	data := gjson.Parse(string(body))
 
 	album := types.Album{}
-	if data.Get("shared_with_community").Bool() {
+	if data.Get("shared_with_community").Bool() || res.StatusCode == 404 {
 		album, err = FetchPosts(albumID)
 	} else {
 		album, err = ParseAlbum(data)
