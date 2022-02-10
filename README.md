@@ -46,6 +46,7 @@ Open an issue to have your instance listed here!
 | [img.riverside.rocks](https://img.riverside.rocks) |     🇺🇸 US    |            |
 | [rimgo.totaldarkness.net](https://rimgo.totaldarkness.net/) | 🇨🇦 CA | |
 | [rimgo.bus-hit.me](https://rimgo.bus-hit.me/) | 🇨🇦 CA | |
+| [rimgo.esmailelbob.xyz](https://rimgo.esmailelbob.xyz) | 🇨🇦 CA |            |
 | [l4d4owboqr6xcmd6lf64gbegel62kbudu3x3jnldz2mx6mhn3bsv3zyd.onion](http://l4d4owboqr6xcmd6lf64gbegel62kbudu3x3jnldz2mx6mhn3bsv3zyd.onion/) |         |            |
 | [jx3dpcwedpzu2mh54obk5gvl64i2ln7pt5mrzd75s4jnndkqwzaim7ad.onion](http://jx3dpcwedpzu2mh54obk5gvl64i2ln7pt5mrzd75s4jnndkqwzaim7ad.onion) |     🇺🇸 US    |            |
 
@@ -65,11 +66,19 @@ Edit the `docker-compose.yml` file using your favorite text editor.
 ```
 nvim docker-compose.yml
 ```
-
+Add a docker group.
+```
+sudo groupadd docker
+```
+Add your user to it.
+```
+sudo usermod -aG docker $USER
+```
 You can now run rimgo.
 ```
-sudo docker-compose up -d
+docker-compose up -d
 ```
+*You may need to log out and then log back if you are on a linux server or if you are on desktop you need to restart your desktop session*
 
 ### Build from source
 
