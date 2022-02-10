@@ -61,24 +61,37 @@ func FetchSubmissions(username string, sort string, page string) ([]types.Submis
 			go func() {
 				defer wg.Done()
 
-				cover := value.Get("images.#(id==\"" + value.Get("cover").String() + "\")")
+				coverData := value.Get("images.#(id==\"" + value.Get("cover").String() + "\")")
+				cover := types.Media{}
+				if coverData.Exists() {
+					cover = types.Media{
+						Id:          coverData.Get("id").String(),
+						Description: coverData.Get("description").String(),
+						Type:        strings.Split(coverData.Get("type").String(), "/")[0],
+						Url:         strings.ReplaceAll(coverData.Get("link").String(), "https://i.imgur.com", ""),
+					}
+				} else {
+					cover = types.Media{
+						Id:          value.Get("id").String(),
+						Description: value.Get("description").String(),
+						Type:        strings.Split(value.Get("type").String(), "/")[0],
+						Url:         strings.ReplaceAll(value.Get("link").String(), "https://i.imgur.com", ""),
+					}
+				}
+
+				id := value.Get("id").String()
 
 				submissions = append(submissions, types.Submission{
-					Id:    value.Get("id").String(),
-					Link:  strings.ReplaceAll(value.Get("link").String(), "https://imgur.com", ""),
+					Id:    id,
+					Link:  "/a/" + id,
 					Title: value.Get("title").String(),
-					Cover: types.Media{
-						Id:          cover.Get("id").String(),
-						Description: cover.Get("description").String(),
-						Type:        strings.Split(cover.Get("type").String(), "/")[0],
-						Url:         strings.ReplaceAll(cover.Get("link").String(), "https://i.imgur.com", ""),
-					},
-					Points:    cover.Get("points").Int(),
-					Upvotes:   cover.Get("ups").Int(),
-					Downvotes: cover.Get("downs").Int(),
-					Comments:  cover.Get("comment_count").Int(),
-					Views:     cover.Get("views").Int(),
-					IsAlbum:   cover.Get("is_album").Bool(),
+					Cover: cover,
+					Points:    value.Get("points").Int(),
+					Upvotes:   value.Get("ups").Int(),
+					Downvotes: value.Get("downs").Int(),
+					Comments:  value.Get("comment_count").Int(),
+					Views:     value.Get("views").Int(),
+					IsAlbum:   value.Get("is_album").Bool(),
 				})
 			}()
 
