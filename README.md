@@ -66,19 +66,18 @@ Edit the `docker-compose.yml` file using your favorite text editor.
 ```
 nvim docker-compose.yml
 ```
-Add a docker group.
+
+**Optional:** Never type `sudo` in for docker commands again! Add a docker group and add your user to it.
 ```
 sudo groupadd docker
-```
-Add your user to it.
-```
 sudo usermod -aG docker $USER
 ```
+*You may need to log out and then log back if you are on a linux server or if you are on desktop you need to restart your desktop session*
+
 You can now run rimgo.
 ```
 docker-compose up -d
 ```
-*You may need to log out and then log back if you are on a linux server or if you are on desktop you need to restart your desktop session*
 
 ### Build from source
 
@@ -106,7 +105,6 @@ You can now run rimgo.
 ./rimgo
 ```
 
-
 ## Configuration
 
 rimgo can be configured using environment variables or a config file.
@@ -122,6 +120,6 @@ rimgo can be configured using environment variables or a config file.
 
 ## Contributing
 
-PRs are welcome!
+PRs are welcome! You can also send patches to `cb.8a3w5@simplelogin.co` but pull requests are preferred.
 
 This software is released under the AGPL 3.0 license. In short, this means that if you make any modifications to the code and then publish the result (e.g. by hosting the result on a web server), you must publicly distribute your changes and declare that they also use AGPL 3.0.
