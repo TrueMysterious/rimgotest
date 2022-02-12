@@ -67,16 +67,9 @@ Edit the `docker-compose.yml` file using your favorite text editor.
 nvim docker-compose.yml
 ```
 
-**Optional:** Never type `sudo` in for docker commands again! Add a docker group and add your user to it.
-```
-sudo groupadd docker
-sudo usermod -aG docker $USER
-```
-*You may need to log out and then log back if you are on a linux server or if you are on desktop you need to restart your desktop session*
-
 You can now run rimgo.
 ```
-docker-compose up -d
+sudo docker-compose up -d
 ```
 
 ### Build from source
