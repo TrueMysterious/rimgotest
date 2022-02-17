@@ -7,19 +7,19 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func HandleGallery(c *fiber.Ctx) error {
+func HandlePost(c *fiber.Ctx) error {
 	utils.SetHeaders(c)
 	c.Set("Content-Security-Policy", "default-src 'none'; media-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; block-all-mixed-content")
 
-	album, err := api.FetchAlbum(c.Params("galleryID"))
+	post, err := api.FetchPosts(c.Params("postID"))
 	if err != nil {
 		return err
 	}
 
 	comments := []types.Comment{}
-	if album.SharedWithCommunity {
+	if post.SharedWithCommunity {
 		c.Set("Cache-Control", "public,max-age=604800")
-		comments, err = api.FetchComments(c.Params("galleryID"))
+		comments, err = api.FetchComments(c.Params("postID"))
 		if err != nil {
 			return err
 		}
@@ -28,7 +28,7 @@ func HandleGallery(c *fiber.Ctx) error {
 	}
 
 	return c.Render("post", fiber.Map{
-		"post":    album,
+		"post":    post,
 		"comments": comments,
 	})
 }

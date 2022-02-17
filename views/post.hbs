@@ -3,8 +3,8 @@
 
 <head>
   <title>
-    {{#if album.Title}}
-    {{album.Title}} - 
+    {{#if post.Title}}
+    {{post.Title}} - 
     {{/if}}
     rimgo
     </title>
@@ -21,19 +21,19 @@
   {{> partials/header }}
 
   <main>
-    <h1>{{album.Title}}</h1>
+    <h1>{{post.Title}}</h1>
 
-    <p>{{album.CreatedAt}}</p>
+    <p>{{post.CreatedAt}}</p>
 
     <div class="imageMeta__wrapper">
-      {{#if album.User.Username}}
+      {{#if post.User.Username}}
       <div class="user">
-        <a href="/user/{{album.User.Username}}">
-          <img src="{{album.User.Avatar}}" class="pfp" width="36" height="36" loading="lazy" />
+        <a href="/user/{{post.User.Username}}">
+          <img src="{{post.User.Avatar}}" class="pfp" width="36" height="36" loading="lazy" />
         </a>
-        <a href="/user/{{album.User.Username}}">
+        <a href="/user/{{post.User.Username}}">
           <p>
-            <b>{{album.User.Username}}</b>
+            <b>{{post.User.Username}}</b>
           </p>
         </a>
       </div>
@@ -41,18 +41,18 @@
       <div class="imageMeta">
         <div class="imageMeta__item">
           <span class="material-icons-outlined" title="Views">visibility</span>
-          <p>{{album.Views}}</p>
+          <p>{{post.Views}}</p>
         </div>
-        {{#if album.SharedWithCommunity}}
-        <p><span class="material-icons-outlined" title="Likes">thumb_up</span> {{album.Upvotes}}</p>
-        <p><span class="material-icons-outlined" title="Dislilkes">thumb_down</span> {{album.Downvotes}}</p>
+        {{#if post.SharedWithCommunity}}
+        <p><span class="material-icons-outlined" title="Likes">thumb_up</span> {{post.Upvotes}}</p>
+        <p><span class="material-icons-outlined" title="Dislilkes">thumb_down</span> {{post.Downvotes}}</p>
         {{/if}}
       </div>
     </div>
 
     <br>
 
-    {{#each album.Media}}
+    {{#each post.Media}}
     {{#if this.Title}}
     <h4>{{this.Title}}</h4>
     {{/if}}
@@ -79,7 +79,7 @@
       <hr>
       <input id="comments__expandBtn" type="checkbox">
       <label class="comments__expandBtn__label" for="comments__expandBtn">
-        <h3>Comments ({{album.Comments}})</h3>
+        <h3>Comments ({{post.Comments}})</h3>
         <span class="comments__expandBtn__icon material-icons-outlined"></span>
       </label>
       <div class="comments">
