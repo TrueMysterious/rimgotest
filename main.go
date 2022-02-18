@@ -53,7 +53,7 @@ func main() {
 	app.Get("/:baseName.:extension", pages.HandleMedia)
 	app.Get("/:postID", pages.HandlePost)
 	app.Get("/a/:galleryID", pages.HandleGallery)
-	//app.Get("/t/:tagID", pages.HandleAlbum)
+	app.Get("/t/:tag", pages.HandleTag)
 	app.Get("/user/:userID", pages.HandleUser)
 	app.Get("/r/:sub/:postID", pages.HandlePost)
 	app.Get("/user/:userID/cover", pages.HandleUserCover)

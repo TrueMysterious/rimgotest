@@ -1,0 +1,27 @@
+main {
+  margin: 0 12vw;
+}
+
+.tagMeta {
+  padding: 2em;
+  border-radius: 12px;
+}
+
+.tagMeta__info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.tagMeta__sort {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tagMeta__sort a {
+  font-weight: 400;
+}
