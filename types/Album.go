@@ -12,4 +12,5 @@ type Album struct {
 	Comments            int64
 	User								User
 	Media               []Media
+	Tags								[]Tag
 }

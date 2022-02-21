@@ -37,7 +37,7 @@ func FetchAlbum(albumID string) (types.Album, error) {
 }
 
 func FetchPosts(albumID string) (types.Album, error) {
-	res, err := http.Get("https://api.imgur.com/post/v1/posts/" + albumID + "?client_id=" + viper.GetString("RIMGU_IMGUR_CLIENT_ID") + "&include=media%2Caccount")
+	res, err := http.Get("https://api.imgur.com/post/v1/posts/" + albumID + "?client_id=" + viper.GetString("RIMGU_IMGUR_CLIENT_ID") + "&include=media%2Caccount%2Ctags")
 	if err != nil {
 		return types.Album{}, err
 	}
@@ -73,6 +73,18 @@ func ParseAlbum(data gjson.Result) (types.Album, error) {
 		},
 	)
 
+	tags := make([]types.Tag, 0)
+	data.Get("tags").ForEach(
+		func(key gjson.Result, value gjson.Result) bool {
+			tags = append(tags, types.Tag{
+				Tag: value.Get("tag").String(),
+				Display: value.Get("display").String(),
+				Background: "/" + value.Get("background_id").String() + ".webp",
+			})
+			return true
+		},
+	)
+
 	createdAt, err := utils.FormatDate(data.Get("created_at").String())
 	if err != nil {
 		return types.Album{}, err
@@ -88,6 +100,7 @@ func ParseAlbum(data gjson.Result) (types.Album, error) {
 		Comments:            data.Get("comment_count").Int(),
 		CreatedAt:           createdAt,
 		Media:               media,
+		Tags:								 tags,
 	}
 
 	account := data.Get("account")

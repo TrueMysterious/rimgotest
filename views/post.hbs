@@ -74,6 +74,18 @@
     <br>
     {{/each}}
 
+    {{#if post.tags}}
+    <div class="tags">
+      {{#each post.tags}}
+      <a href="/t/{{this.Tag}}">
+        <div class="tag" style="background-image: url('{{this.Background}}');">
+          <p class="tag__display">{{this.Display}}</p>
+        </div>
+      </a>
+      {{/each}}
+    </div>
+    {{/if}}
+
     {{#if comments}}
     <div>
       <hr>
