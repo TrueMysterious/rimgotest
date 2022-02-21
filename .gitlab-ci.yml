@@ -1,0 +1,21 @@
+variables:
+  REPO_NAME: codeberg.org/video-prize-ranch/rimgo
+  DOCKER_HOST: tcp://docker:2375
+
+build:
+  image: docker:20
+  stage: deploy
+  services:
+    - name: docker:20-dind
+      command: ["--experimental"]
+  before_script:
+    - mkdir -p ~/.docker/cli-plugins
+    - wget -O ~/.docker/cli-plugins/docker-buildx https://github.com/docker/buildx/releases/download/v0.7.1/buildx-v0.7.1.linux-amd64
+    - chmod +x ~/.docker/cli-plugins/docker-buildx
+    - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker context create mybuilder
+    - docker buildx create --use --name mybuilder mybuilder
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker buildx build --cache-from $CI_REGISTRY_IMAGE:latest --platform linux/amd64,linux/arm64 --push -t $CI_REGISTRY_IMAGE:latest .

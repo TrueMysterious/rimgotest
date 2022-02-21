@@ -6,17 +6,20 @@ An alternative frontend for Imgur. Based on [rimgu](https://codeberg.org/3np/rim
 <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">
   <img alt="License: AGPLv3" src="https://shields.io/badge/License-AGPL%20v3-blue.svg">
 </a>
+<a href="https://gitlab.com/overtime-zone-wildfowl/rimgo">
+  <img alt="CI" src="https://gitlab.com/overtime-zone-wildfowl/rimgo/badges/main/pipeline.svg">
+</a>
 
 It's read-only and works without JavaScript. Images and albums can be viewed without wasting resources from downloading and running tracking scripts. No sign-up nags.
 
 ## Features
 
-- [x] URL-compatible with i.imgur.com - just replace the domain in the URL
-- [x] Images and videos (gifv, mp4)
-- [ ] Galleries with comments
-- [x] Albums
-- [ ] User page
-- [ ] Tag page
+- URL-compatible with i.imgur.com - just replace the domain in the URL
+- Images and videos (~~gifv~~, mp4)
+- Galleries with comments
+- Albums
+- User page
+- Tag page
 
 This is currently very early stage software. Some things left to implement (contributions welcome!):
 
