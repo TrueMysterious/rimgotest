@@ -51,8 +51,8 @@ main {
   font-weight: 400;
 }
 
-img,
-video:not(:fullscreen) {
+.posts img,
+.posts video:not(:fullscreen) {
   object-fit: cover;
   aspect-ratio: 1;
 }
