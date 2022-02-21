@@ -4,6 +4,7 @@ WORKDIR /src
 RUN apk --no-cache add git
 RUN git clone https://codeberg.org/video-prize-ranch/rimgo .
 
+RUN go mod download
 RUN go build
 
 FROM alpine:latest as bin
