@@ -1,6 +1,8 @@
 package pages
 
 import (
+	"fmt"
+
 	"codeberg.org/video-prize-ranch/rimgo/api"
 	"codeberg.org/video-prize-ranch/rimgo/types"
 	"codeberg.org/video-prize-ranch/rimgo/utils"
@@ -12,7 +14,16 @@ func HandlePost(c *fiber.Ctx) error {
 	c.Set("Content-Security-Policy", "default-src 'none'; media-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; block-all-mixed-content")
 
 	post, err := api.FetchPosts(c.Params("postID"))
-	if err != nil {
+	if post.Id == "" {
+		post, err = api.FetchPosts(c.Params("postID"))
+		if post.Id == "" {
+			post, err = api.FetchMedia(c.Params("postID"))
+			if post.Id == "" {
+				return fmt.Errorf("404 page not found")				
+			}
+		}
+	}
+ 	if err != nil {
 		return err
 	}
 

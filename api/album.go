@@ -52,6 +52,22 @@ func FetchPosts(albumID string) (types.Album, error) {
 	return ParseAlbum(data)
 }
 
+func FetchMedia(mediaID string) (types.Album, error) {
+	res, err := http.Get("https://api.imgur.com/post/v1/media/" + mediaID + "?client_id=" + viper.GetString("RIMGU_IMGUR_CLIENT_ID") + "&include=media%2Caccount")
+	if err != nil {
+		return types.Album{}, err
+	}
+
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		return types.Album{}, err
+	}
+
+	data := gjson.Parse(string(body))
+
+	return ParseAlbum(data)
+}
+
 func ParseAlbum(data gjson.Result) (types.Album, error) {
 	media := make([]types.Media, 0)
 	data.Get("media").ForEach(

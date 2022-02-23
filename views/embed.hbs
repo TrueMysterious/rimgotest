@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {{> partials/head }}
+
+  <link rel="stylesheet" href="/static/css/embed.css" />
+</head>
+
+<body>
+  <video loop poster="/{{id}}.webp" autoplay width="100%">
+    <source src="/{{id}}.webm" type="video/webm" />
+    <source src="/{{id}}.mp4" type="video/mp4" />
+  </video>
+  <div class="postLink">
+    <a href="/{{id}}">
+      <img src="/static/img/rimgo.svg" width="32px" height="32px" class="logo">
+    </a>
+    <a href="/{{id}}" class="rimgoLink">
+      rimgo
+    </a>
+    <a href="/{{id}}.mp4?download=1">download</a>
+  </div>
+</body>
+
+</html>

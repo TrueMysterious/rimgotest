@@ -49,7 +49,8 @@ func main() {
 		return err
 	})
 
-	app.Get("/", pages.FrontpageHandler)
+	app.Get("/", pages.HandleFrontpage)
+	app.Get("/:postID.gifv", pages.HandleEmbed)
 	app.Get("/:baseName.:extension", pages.HandleMedia)
 	app.Get("/:postID", pages.HandlePost)
 	app.Get("/a/:galleryID", pages.HandleGallery)

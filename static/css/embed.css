@@ -1,0 +1,13 @@
+.logo {
+  filter: invert(180deg), hue-rotate(180deg);
+}
+
+.postLink {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.rimgoLink {
+  width: 100%;
+}
