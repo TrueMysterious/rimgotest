@@ -5,13 +5,22 @@ import (
 	"net/http"
 	"strings"
 	"sync"
+	"time"
 
 	"codeberg.org/video-prize-ranch/rimgo/types"
+	"github.com/patrickmn/go-cache"
 	"github.com/spf13/viper"
 	"github.com/tidwall/gjson"
 )
 
+var tagCache = cache.New(15*time.Minute, 15*time.Minute)
+
 func FetchTag(tag string, sort string, page string) (types.Tag, error) {
+	cacheData, found := tagCache.Get(tag + sort + page)
+	if found {
+		return cacheData.(types.Tag), nil
+	}
+
 	req, err := http.NewRequest("GET", "https://api.imgur.com/post/v1/posts/t/"+tag, nil)
 	if err != nil {
 		return types.Tag{}, err
@@ -82,12 +91,15 @@ func FetchTag(tag string, sort string, page string) (types.Tag, error) {
 
 	wg.Wait()
 
-	return types.Tag{
+	tagData := types.Tag{
 		Tag: tag,
 		Display: data.Get("display").String(),
 		Sort: sort,
 		PostCount: data.Get("post_count").Int(),
 		Posts: posts,
 		Background: "/" + data.Get("background_id").String() + ".webp",
-	}, nil
+	}
+
+	tagCache.Set(tag, tagData, cache.DefaultExpiration)
+	return tagData, nil
 }

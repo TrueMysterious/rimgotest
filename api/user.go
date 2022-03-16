@@ -8,11 +8,19 @@ import (
 	"time"
 
 	"codeberg.org/video-prize-ranch/rimgo/types"
+	"github.com/patrickmn/go-cache"
 	"github.com/spf13/viper"
 	"github.com/tidwall/gjson"
 )
 
+var userCache = cache.New(30*time.Minute, 15*time.Minute)
+
 func FetchUser(username string) (types.User, error) {
+	cacheData, found := userCache.Get(username)
+	if found {
+		return cacheData.(types.User), nil
+	}
+
 	res, err := http.Get("https://api.imgur.com/account/v1/accounts/" + username + "?client_id=" + viper.GetString("RIMGU_IMGUR_CLIENT_ID"))
 	if err != nil {
 		return types.User{}, err
@@ -27,7 +35,7 @@ func FetchUser(username string) (types.User, error) {
 
 	createdTime, _ := time.Parse(time.RFC3339, data.Get("created_at").String())
 
-	return types.User{
+	user := types.User{
 		Id:        data.Get("id").Int(),
 		Bio:       data.Get("bio").String(),
 		Username:  data.Get("username").String(),
@@ -35,10 +43,18 @@ func FetchUser(username string) (types.User, error) {
 		Cover:     strings.ReplaceAll(data.Get("cover_url").String(), "https://imgur.com", ""),
 		Avatar:    strings.ReplaceAll(data.Get("avatar_url").String(), "https://i.imgur.com", ""),
 		CreatedAt: createdTime.Format("January 2, 2006"),
-	}, nil
+	}
+
+	userCache.Set(username, user, 1*time.Hour)
+	return user, nil
 }
 
 func FetchSubmissions(username string, sort string, page string) ([]types.Submission, error) {
+	cacheData, found := userCache.Get(username + "-submissions")
+	if found {
+		return cacheData.([]types.Submission), nil
+	}
+
 	res, err := http.Get("https://api.imgur.com/3/account/" + username + "/submissions/" + page + "/" + sort + "?album_previews=1&client_id=" + viper.GetString("RIMGU_IMGUR_CLIENT_ID"))
 	if err != nil {
 		return []types.Submission{}, err
@@ -99,5 +115,7 @@ func FetchSubmissions(username string, sort string, page string) ([]types.Submis
 		},
 	)
 	wg.Wait()
+
+	userCache.Set(username + "-submissions", submissions, 15*time.Minute)
 	return submissions, nil
 }

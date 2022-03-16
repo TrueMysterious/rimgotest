@@ -10,12 +10,18 @@ import (
 	"codeberg.org/video-prize-ranch/rimgo/types"
 	"codeberg.org/video-prize-ranch/rimgo/utils"
 	"github.com/dustin/go-humanize"
+	"github.com/patrickmn/go-cache"
 	"github.com/spf13/viper"
 	"github.com/tidwall/gjson"
 )
 
+var commentCache = cache.New(15*time.Minute, 15*time.Minute)
+
 func FetchComments(galleryID string) ([]types.Comment, error) {
-	// https://api.imgur.com/comment/v1/comments?client_id=546c25a59c58ad7&filter[post]=eq:g1bk7CB&include=account&per_page=30&sort=best
+	cacheData, found := commentCache.Get(galleryID)
+	if found {
+		return cacheData.([]types.Comment), nil
+	}
 
 	res, err := http.Get("https://api.imgur.com/comment/v1/comments?client_id=" + viper.GetString("RIMGU_IMGUR_CLIENT_ID") + "&filter[post]=eq:" + galleryID + "&include=account,adconfig&per_page=30&sort=best")
 	if err != nil {
@@ -45,6 +51,7 @@ func FetchComments(galleryID string) ([]types.Comment, error) {
 	)
 	wg.Wait()
 
+	commentCache.Set(galleryID, comments, cache.DefaultExpiration)
 	return comments, nil
 }
 

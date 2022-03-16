@@ -4,15 +4,22 @@ import (
 	"io"
 	"net/http"
 	"strings"
+	"time"
 
 	"codeberg.org/video-prize-ranch/rimgo/types"
 	"codeberg.org/video-prize-ranch/rimgo/utils"
+	"github.com/patrickmn/go-cache"
 	"github.com/spf13/viper"
 	"github.com/tidwall/gjson"
 )
 
+var albumCache = cache.New(1*time.Hour, 15*time.Minute)
+
 func FetchAlbum(albumID string) (types.Album, error) {
-	// https://api.imgur.com/post/v1/albums/zk7mdKH?client_id=${CLIENT_ID}&include=media%2Caccount
+	cacheData, found := albumCache.Get(albumID + "-album")
+	if found {
+		return cacheData.(types.Album), nil
+	}
 
 	res, err := http.Get("https://api.imgur.com/post/v1/albums/" + albumID + "?client_id=" + viper.GetString("RIMGU_IMGUR_CLIENT_ID") + "&include=media%2Caccount")
 	if err != nil {
@@ -33,10 +40,16 @@ func FetchAlbum(albumID string) (types.Album, error) {
 		album, err = ParseAlbum(data)
 	}
 
+	albumCache.Set(albumID + "-album", album, cache.DefaultExpiration)
 	return album, err
 }
 
 func FetchPosts(albumID string) (types.Album, error) {
+	cacheData, found := albumCache.Get(albumID + "-posts")
+	if found {
+		return cacheData.(types.Album), nil
+	}
+
 	res, err := http.Get("https://api.imgur.com/post/v1/posts/" + albumID + "?client_id=" + viper.GetString("RIMGU_IMGUR_CLIENT_ID") + "&include=media%2Caccount%2Ctags")
 	if err != nil {
 		return types.Album{}, err
@@ -48,11 +61,21 @@ func FetchPosts(albumID string) (types.Album, error) {
 	}
 
 	data := gjson.Parse(string(body))
+	album, err := ParseAlbum(data)
+	if err != nil {
+		return types.Album{}, err
+	}
 
-	return ParseAlbum(data)
+	albumCache.Set(albumID + "-posts", album, cache.DefaultExpiration)
+	return album, nil
 }
 
 func FetchMedia(mediaID string) (types.Album, error) {
+	cacheData, found := albumCache.Get(mediaID + "-media")
+	if found {
+		return cacheData.(types.Album), nil
+	}
+	
 	res, err := http.Get("https://api.imgur.com/post/v1/media/" + mediaID + "?client_id=" + viper.GetString("RIMGU_IMGUR_CLIENT_ID") + "&include=media%2Caccount")
 	if err != nil {
 		return types.Album{}, err
@@ -64,8 +87,13 @@ func FetchMedia(mediaID string) (types.Album, error) {
 	}
 
 	data := gjson.Parse(string(body))
+	album, err := ParseAlbum(data)
+	if err != nil {
+		return types.Album{}, err
+	}
 
-	return ParseAlbum(data)
+	albumCache.Set(mediaID + "-media", album, cache.DefaultExpiration)
+	return album, nil
 }
 
 func ParseAlbum(data gjson.Result) (types.Album, error) {
