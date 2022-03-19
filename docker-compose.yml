@@ -2,7 +2,8 @@ version: '3'
 
 services:
   rimgo:
-    #image: quay.io/pussthecatorg/rimgo # Uncomment to use image
+    #image: registry.gitlab.com/overtime-zone-wildfowl/rimgo # Uncomment to use image, official image
+    #image: quay.io/pussthecatorg/rimgo # Unofficial image
     build: .
     ports:
       - 3000:3000
