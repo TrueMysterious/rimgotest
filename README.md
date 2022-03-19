@@ -44,7 +44,6 @@ Open an issue to have your instance listed here!
 | Website                                                                                                                                  | Country | Cloudflare |
 |------------------------------------------------------------------------------------------------------------------------------------------|---------|------------|
 | [i.bcow.xyz](https://i.bcow.xyz/) (official) | 🇨🇦 CA   |            |
-| [rimgo.bcow.xyz](https://rimgo.bcow.xyz/) (official) | 🌐 Global   | |
 | [rimgo.pussthecat.org](https://rimgo.pussthecat.org/)                                                                                    | 🇩🇪 DE   |            |
 | [img.riverside.rocks](https://img.riverside.rocks) |     🇺🇸 US    |            |
 | [rimgo.totaldarkness.net](https://rimgo.totaldarkness.net/) | 🇨🇦 CA | |
@@ -55,8 +54,6 @@ Open an issue to have your instance listed here!
 | [rimgo.lqs5fjmajyp7rvp4qvyubwofzi6d4imua7vs237rkc4m5qogitqwrgyd.onion](http://rimgo.lqs5fjmajyp7rvp4qvyubwofzi6d4imua7vs237rkc4m5qogitqwrgyd.onion) | 🇨🇦 CA |            |
 | [be7udfhmnzqyt7cxysg6c4pbawarvaofjjywp35nhd5qamewdfxl6sid.onion](http://be7udfhmnzqyt7cxysg6c4pbawarvaofjjywp35nhd5qamewdfxl6sid.onion) | 🇦🇺 AU | |
 | [xazdnfgtzmcbcxhmcbbvr4uodd6jtn4fdiayasghywdn227xsmoa.b32.i2p](http://xazdnfgtzmcbcxhmcbbvr4uodd6jtn4fdiayasghywdn227xsmoa.b32.i2p) | 🇦🇺 AU | |
-
-> rimgo.bcow.xyz is running on AWS Lambda@Edge for a global serverless deployment, there may be issues and CloudFront collects some anonymous usage statistics.
 
 ## Install
 rimgo can run on any platform Go compiles on.
