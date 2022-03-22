@@ -11,7 +11,6 @@ func HandleFrontpage(c *fiber.Ctx) error {
 	c.Set("Content-Security-Policy", "default-src 'none'; style-src 'self'; img-src 'self'; font-src 'self'; block-all-mixed-content")
 
 	return c.Render("frontpage", fiber.Map{
-		"proto": c.Protocol(),
 		"domain": c.Hostname(),
 	})
 }

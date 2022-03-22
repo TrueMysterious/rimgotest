@@ -39,18 +39,7 @@
 
     <h2>Usage</h2>
     
-    <p>Just replace imgur.com with the domain of this instance! You can setup automatic redirects using <a href="https://github.com/einaregilsson/Redirector">Redirector</a>.</p>
-
-    <h3>Redirector configuration</h3>
-    
-    <ul>
-      <li>Description: Imgur -> rimgo</li>
-      <li>Example URL: https://imgur.com/a/H8M4rcp</li>
-      <li>Include pattern: <code>^https?://(i|).?imgur.com(/.*)?$</code></li>
-      <li>Redirect to: <code>{{proto}}://{{domain}}$2</code></li>
-      <li>Pattern type: Regular Expression</li>
-    </ul>
-
+    <p>Just replace imgur.com or i.imgur.com with <code>{{domain}}</code>! You can setup automatic redirects using <a href="https://github.com/libredirect/libredirect">LibRedirect</a>.</p>
   </main>
 
   {{> partials/footer }}
