@@ -89,7 +89,7 @@ footer {
 
 @media only screen and (max-width: 812px) {
   main {
-    margin: 0;
+    margin: 0 !important;
   }
   footer {
     flex-direction: column;
