@@ -43,7 +43,7 @@ Open an issue to have your instance listed here!
 
 ### Clearnet
 
-| Website                                                    | Country | Cloudflare |
+| URL                                                        | Country | Cloudflare |
 | :--------------------------------------------------------- | :------ | :--------- |
 | [i.bcow.xyz](https://i.bcow.xyz) (official)                | 🇨🇦 CA   |            |
 | [rimgo.pussthecat.org](https://rimgo.pussthecat.org)       | 🇩🇪 DE   |            |
@@ -51,13 +51,13 @@ Open an issue to have your instance listed here!
 | [rimgo.totaldarkness.net](https://rimgo.totaldarkness.net) | 🇨🇦 CA   |            |
 | [rimgo.bus-hit.me](https://rimgo.bus-hit.me)               | 🇨🇦 CA   |            |
 | [rimgo.esmailelbob.xyz](https://rimgo.esmailelbob.xyz)     | 🇨🇦 CA   |            |
-| [rimgo.lunar.icu](https://rimgo.lunar.icu)                 | 🇩🇪 DE   | 😿         |
-| [i.actionsack.com](https://i.actionsack.com)               | 🇺🇸 US   | 😿         |
+| [rimgo.lunar.icu](https://rimgo.lunar.icu)                 | 🇩🇪 DE   | 😢         |
+| [i.actionsack.com](https://i.actionsack.com)               | 🇺🇸 US   | 😢         |
 
 ### Tor
 
-| Address | Country |
-| :------ | :------ |
+| URL | Country |
+| :-- | :------ |
 | [l4d4owboqr6xcmd6lf64gbegel62kbudu3x3jnldz2mx6mhn3bsv3zyd.onion](http://l4d4owboqr6xcmd6lf64gbegel62kbudu3x3jnldz2mx6mhn3bsv3zyd.onion/) | N/A |
 | [jx3dpcwedpzu2mh54obk5gvl64i2ln7pt5mrzd75s4jnndkqwzaim7ad.onion](http://jx3dpcwedpzu2mh54obk5gvl64i2ln7pt5mrzd75s4jnndkqwzaim7ad.onion) | 🇺🇸 US |
 | [rimgo.lqs5fjmajyp7rvp4qvyubwofzi6d4imua7vs237rkc4m5qogitqwrgyd.onion](http://rimgo.lqs5fjmajyp7rvp4qvyubwofzi6d4imua7vs237rkc4m5qogitqwrgyd.onion) | 🇨🇦 CA |
@@ -65,8 +65,8 @@ Open an issue to have your instance listed here!
 
 ### I2P
 
-| Address | Country |
-| :------ | :------ |
+| URL | Country |
+| :-- | :------ |
 | [xazdnfgtzmcbcxhmcbbvr4uodd6jtn4fdiayasghywdn227xsmoa.b32.i2p](http://xazdnfgtzmcbcxhmcbbvr4uodd6jtn4fdiayasghywdn227xsmoa.b32.i2p) | 🇦🇺 AU |
 
 ## Install
