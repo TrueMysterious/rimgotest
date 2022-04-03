@@ -6,6 +6,9 @@ An alternative frontend for Imgur. Based on [rimgu](https://codeberg.org/3np/rim
 <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">
   <img alt="License: AGPLv3" src="https://shields.io/badge/License-AGPL%20v3-blue.svg">
 </a>
+<a href="https://matrix.to/#/#rimgo:nitro.chat">
+  <img alt="Matrix" src="https://img.shields.io/badge/chat-matrix-blue">
+</a>
 <a href="https://gitlab.com/overtime-zone-wildfowl/rimgo">
   <img alt="CI" src="https://gitlab.com/overtime-zone-wildfowl/rimgo/badges/main/pipeline.svg">
 </a>
@@ -21,14 +24,14 @@ It's read-only and works without JavaScript. Images and albums can be viewed wit
 - User page
 - Tag page
 
-This is currently very early stage software. Some things left to implement (contributions welcome!):
+Some things left to implement (contributions welcome!):
 
 - [x] Streaming (currently media is downloaded in full in rimgu before it's returned)
 - [ ] Localization/internationalization
 - [x] Pretty CSS styling (responsive?)
 - [ ] Support for other popular image sites
-- [ ] Filtering and exploration on user/tags pages
-- [ ] Responsive scaling of videos on user/tags pages
+- [x] Filtering and exploration on user/tags pages
+- [x] Responsive scaling of videos on user/tags pages
 - [x] Logo
 
 Things that are considered out of scope:
