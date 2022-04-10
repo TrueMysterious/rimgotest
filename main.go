@@ -48,6 +48,11 @@ func main() {
 		_, err := c.Write(file)
 		return err
 	})
+	app.Get("/favicon.ico", func(c *fiber.Ctx) error {
+		file, _ := static.GetFiles().ReadFile("favicon/favicon.ico")
+		_, err := c.Write(file)
+		return err
+	})
 
 	app.Get("/", pages.HandleFrontpage)
 	app.Get("/:postID.gifv", pages.HandleEmbed)
