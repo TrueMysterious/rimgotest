@@ -13,7 +13,7 @@ import (
 func HandleUser(c *fiber.Ctx) error {
 	utils.SetHeaders(c)
 	c.Set("Cache-Control", "public,max-age=604800")
-	c.Set("Content-Security-Policy", "default-src 'none'; media-src 'self'; style-src 'unsafe-inline' 'self'; img-src 'self'; font-src 'self'; block-all-mixed-content")
+	c.Set("Content-Security-Policy", "default-src 'none'; media-src 'self'; style-src 'unsafe-inline' 'self'; img-src 'self'; font-src 'self'; manifest-src 'self'; block-all-mixed-content")
 
 	page := "0"
 	if c.Query("page") != "" {

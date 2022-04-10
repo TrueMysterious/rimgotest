@@ -11,7 +11,7 @@ import (
 
 func HandlePost(c *fiber.Ctx) error {
 	utils.SetHeaders(c)
-	c.Set("Content-Security-Policy", "default-src 'none'; media-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; block-all-mixed-content")
+	c.Set("Content-Security-Policy", "default-src 'none'; media-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; manifest-src 'self'; block-all-mixed-content")
 
 	post, err := api.FetchPosts(c.Params("postID"))
 	if post.Id == "" {

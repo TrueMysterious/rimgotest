@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "rimgo",
+    "short_name": "rimgo",
     "icons": [
         {
             "src": "/static/favicon/android-chrome-192x192.png",
