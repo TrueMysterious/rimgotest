@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"codeberg.org/video-prize-ranch/rimgo/types"
+	"codeberg.org/video-prize-ranch/rimgo/utils"
 	"github.com/patrickmn/go-cache"
-	"github.com/spf13/viper"
 	"github.com/tidwall/gjson"
 )
 
@@ -27,7 +27,7 @@ func FetchTag(tag string, sort string, page string) (types.Tag, error) {
 	}
 
 	q := req.URL.Query()
-	q.Add("client_id", viper.GetString("RIMGU_IMGUR_CLIENT_ID"))
+	q.Add("client_id", utils.Config["imgurId"].(string))
 	q.Add("include", "cover")
 	q.Add("page", page)
 

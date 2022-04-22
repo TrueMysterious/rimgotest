@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"codeberg.org/video-prize-ranch/rimgo/types"
+	"codeberg.org/video-prize-ranch/rimgo/utils"
 	"github.com/patrickmn/go-cache"
-	"github.com/spf13/viper"
 	"github.com/tidwall/gjson"
 )
 
@@ -21,7 +21,7 @@ func FetchUser(username string) (types.User, error) {
 		return cacheData.(types.User), nil
 	}
 
-	res, err := http.Get("https://api.imgur.com/account/v1/accounts/" + username + "?client_id=" + viper.GetString("RIMGU_IMGUR_CLIENT_ID"))
+	res, err := http.Get("https://api.imgur.com/account/v1/accounts/" + username + "?client_id=" + utils.Config["imgurId"].(string))
 	if err != nil {
 		return types.User{}, err
 	}
@@ -55,7 +55,7 @@ func FetchSubmissions(username string, sort string, page string) ([]types.Submis
 		return cacheData.([]types.Submission), nil
 	}
 
-	res, err := http.Get("https://api.imgur.com/3/account/" + username + "/submissions/" + page + "/" + sort + "?album_previews=1&client_id=" + viper.GetString("RIMGU_IMGUR_CLIENT_ID"))
+	res, err := http.Get("https://api.imgur.com/3/account/" + username + "/submissions/" + page + "/" + sort + "?album_previews=1&client_id=" + utils.Config["imgurId"].(string))
 	if err != nil {
 		return []types.Submission{}, err
 	}

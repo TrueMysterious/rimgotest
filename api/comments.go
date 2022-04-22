@@ -11,7 +11,6 @@ import (
 	"codeberg.org/video-prize-ranch/rimgo/utils"
 	"github.com/dustin/go-humanize"
 	"github.com/patrickmn/go-cache"
-	"github.com/spf13/viper"
 	"github.com/tidwall/gjson"
 )
 
@@ -23,7 +22,7 @@ func FetchComments(galleryID string) ([]types.Comment, error) {
 		return cacheData.([]types.Comment), nil
 	}
 
-	res, err := http.Get("https://api.imgur.com/comment/v1/comments?client_id=" + viper.GetString("RIMGU_IMGUR_CLIENT_ID") + "&filter[post]=eq:" + galleryID + "&include=account,adconfig&per_page=30&sort=best")
+	res, err := http.Get("https://api.imgur.com/comment/v1/comments?client_id=" + utils.Config["imgurId"].(string) + "&filter[post]=eq:" + galleryID + "&include=account,adconfig&per_page=30&sort=best")
 	if err != nil {
 		return []types.Comment{}, err
 	}

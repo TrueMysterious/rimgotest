@@ -9,7 +9,6 @@ import (
 	"codeberg.org/video-prize-ranch/rimgo/types"
 	"codeberg.org/video-prize-ranch/rimgo/utils"
 	"github.com/patrickmn/go-cache"
-	"github.com/spf13/viper"
 	"github.com/tidwall/gjson"
 )
 
@@ -21,7 +20,7 @@ func FetchAlbum(albumID string) (types.Album, error) {
 		return cacheData.(types.Album), nil
 	}
 
-	res, err := http.Get("https://api.imgur.com/post/v1/albums/" + albumID + "?client_id=" + viper.GetString("RIMGU_IMGUR_CLIENT_ID") + "&include=media%2Caccount")
+	res, err := http.Get("https://api.imgur.com/post/v1/albums/" + albumID + "?client_id=" + utils.Config["imgurId"].(string) + "&include=media%2Caccount")
 	if err != nil {
 		return types.Album{}, err
 	}
@@ -50,7 +49,7 @@ func FetchPosts(albumID string) (types.Album, error) {
 		return cacheData.(types.Album), nil
 	}
 
-	res, err := http.Get("https://api.imgur.com/post/v1/posts/" + albumID + "?client_id=" + viper.GetString("RIMGU_IMGUR_CLIENT_ID") + "&include=media%2Caccount%2Ctags")
+	res, err := http.Get("https://api.imgur.com/post/v1/posts/" + albumID + "?client_id=" + utils.Config["imgurId"].(string) + "&include=media%2Caccount%2Ctags")
 	if err != nil {
 		return types.Album{}, err
 	}
@@ -76,7 +75,7 @@ func FetchMedia(mediaID string) (types.Album, error) {
 		return cacheData.(types.Album), nil
 	}
 	
-	res, err := http.Get("https://api.imgur.com/post/v1/media/" + mediaID + "?client_id=" + viper.GetString("RIMGU_IMGUR_CLIENT_ID") + "&include=media%2Caccount")
+	res, err := http.Get("https://api.imgur.com/post/v1/media/" + mediaID + "?client_id=" + utils.Config["imgurId"].(string) + "&include=media%2Caccount")
 	if err != nil {
 		return types.Album{}, err
 	}

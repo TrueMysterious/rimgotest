@@ -120,16 +120,15 @@ You can now run rimgo.
 
 ## Configuration
 
-rimgo can be configured using environment variables or a config file.
+rimgo can be configured using environment variables.
 
 ### Environment variables
 
-| Name                  | Default         |
-|-----------------------|-----------------|
-| RIMGU_PORT            | 3000            |
-| RIMGU_HOST            | localhost       |
-| RIMGU_ADDRESS         | 0.0.0.0         |
-| RIMGU_IMGUR_CLIENT_ID | 546c25a59c58ad7 |
+| Name            | Default         |
+|-----------------|-----------------|
+| PORT            | 3000            |
+| ADDRESS         | 0.0.0.0         |
+| IMGUR_CLIENT_ID | 546c25a59c58ad7 |
 
 ## Contributing
 
