@@ -9,6 +9,7 @@ import (
 	"codeberg.org/video-prize-ranch/rimgo/views"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/filesystem"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/template/handlebars"
 	"github.com/spf13/viper"
 )
@@ -39,6 +40,7 @@ func main() {
 		StreamRequestBody: true,
 	})
 
+	app.Use(recover.New())
 	app.Use("/static", filesystem.New(filesystem.Config{
 		Root: http.FS(static.GetFiles()),
 	}))
