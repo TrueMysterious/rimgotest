@@ -108,11 +108,6 @@ Build rimgo.
 go build
 ```
 
-Edit the config file using your preferred editor.
-```
-nvim config.yml
-```
-
 You can now run rimgo.
 ```
 ./rimgo
