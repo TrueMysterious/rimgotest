@@ -48,7 +48,7 @@ Open an issue to have your instance listed here!
 
 | URL                                                        | Country | Cloudflare |
 | :--------------------------------------------------------- | :------ | :--------- |
-| [i.bcow.xyz](https://i.bcow.xyz) (official)                | 🇨🇦 CA   |            |
+| [i.bcow.xyz](https://i.bcow.xyz) (official)                | 🇺🇸 CA   | 😢         |
 | [rimgo.pussthecat.org](https://rimgo.pussthecat.org)       | 🇩🇪 DE   |            |
 | [img.riverside.rocks](https://img.riverside.rocks)         | 🇺🇸 US   |            |
 | [rimgo.totaldarkness.net](https://rimgo.totaldarkness.net) | 🇨🇦 CA   |            |
@@ -56,6 +56,8 @@ Open an issue to have your instance listed here!
 | [rimgo.esmailelbob.xyz](https://rimgo.esmailelbob.xyz)     | 🇨🇦 CA   |            |
 | [rimgo.lunar.icu](https://rimgo.lunar.icu)                 | 🇩🇪 DE   | 😢         |
 | [i.actionsack.com](https://i.actionsack.com)               | 🇺🇸 US   | 😢         |
+
+> i.bcow.xyz is temporarily on [Render](https://render.com/) which uses Cloudflare.
 
 ### Tor
 
