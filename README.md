@@ -48,7 +48,7 @@ Open an issue to have your instance listed here!
 
 | URL                                                        | Country | Cloudflare |
 | :--------------------------------------------------------- | :------ | :--------- |
-| [i.bcow.xyz](https://i.bcow.xyz) (official)                | 🇺🇸 CA   | 😢         |
+| [i.bcow.xyz](https://i.bcow.xyz) (official)                | 🇳🇱️ NL   |            |
 | [rimgo.pussthecat.org](https://rimgo.pussthecat.org)       | 🇩🇪 DE   |            |
 | [img.riverside.rocks](https://img.riverside.rocks)         | 🇺🇸 US   |            |
 | [rimgo.totaldarkness.net](https://rimgo.totaldarkness.net) | 🇨🇦 CA   |            |
@@ -56,8 +56,6 @@ Open an issue to have your instance listed here!
 | [rimgo.esmailelbob.xyz](https://rimgo.esmailelbob.xyz)     | 🇨🇦 CA   |            |
 | [rimgo.lunar.icu](https://rimgo.lunar.icu)                 | 🇩🇪 DE   | 😢         |
 | [i.actionsack.com](https://i.actionsack.com)               | 🇺🇸 US   | 😢         |
-
-> i.bcow.xyz is temporarily on [Render](https://render.com/) which uses Cloudflare.
 
 ### Tor
 
@@ -77,7 +75,7 @@ Open an issue to have your instance listed here!
 ## Install
 rimgo can run on any platform Go compiles on.
 
-### Docker
+### Docker (recommended)
 Install Docker and docker-compose, then clone this repository.
 ```
 git clone https://codeberg.org/video-prize-ranch/rimgo
