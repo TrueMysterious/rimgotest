@@ -32,4 +32,4 @@ deploy:
     - apk update && apk --no-cache add curl
     - wget -O - https://fly.io/install.sh | sh
   script:
-    - /root/.fly/bin/flyctl deploy --no-cache --detach
+    - /root/.fly/bin/flyctl deploy --no-cache --detach -t $FLY_API_TOKEN
