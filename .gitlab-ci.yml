@@ -2,9 +2,13 @@ variables:
   REPO_NAME: codeberg.org/video-prize-ranch/rimgo
   DOCKER_HOST: tcp://docker:2375
 
-build:
+stages:
+  - build
+  - deploy
+
+docker:
   image: docker:20
-  stage: deploy
+  stage: build
   services:
     - name: docker:20-dind
       command: ["--experimental"]
@@ -19,3 +23,13 @@ build:
     - docker buildx create --use --name mybuilder mybuilder
     - docker pull $CI_REGISTRY_IMAGE:latest || true
     - docker buildx build --cache-from $CI_REGISTRY_IMAGE:latest --platform linux/amd64,linux/arm64 --push -t $CI_REGISTRY_IMAGE:latest .
+
+deploy:
+  image: alpine:latest
+  stage: deploy
+  needs: []
+  before_script:
+    - apk update && apk --no-cache add curl
+    - wget -O - https://fly.io/install.sh | sh
+  script:
+    - /root/.fly/bin/flyctl deploy --no-cache --detach
