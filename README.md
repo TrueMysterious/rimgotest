@@ -72,6 +72,18 @@ Open an issue to have your instance listed here!
 | :-- | :------ |
 | [xazdnfgtzmcbcxhmcbbvr4uodd6jtn4fdiayasghywdn227xsmoa.b32.i2p](http://xazdnfgtzmcbcxhmcbbvr4uodd6jtn4fdiayasghywdn227xsmoa.b32.i2p) | 🇦🇺 AU |
 
+## Automatically redirect links
+
+### LibRedirect
+Use [LibRedirect](https://github.com/libredirect/libredirect) to automatically redirect Imgur links to rimgo!
+- [Firefox](https://addons.mozilla.org/firefox/addon/libredirect/)
+- [Chromium-based browsers (Brave, Google Chrome)](https://github.com/libredirect/libredirect#install-in-chromium-brave-and-chrome)
+- [Edge](https://microsoftedge.microsoft.com/addons/detail/libredirect/aodffkeankebfonljgbcfbbaljopcpdb)
+
+### GreaseMonkey script
+There is a script to redirect Imgur links to rimgo.
+[https://codeberg.org/zortazert/GreaseMonkey-Redirect/src/branch/main/imgur-to-rimgo.user.js](https://codeberg.org/zortazert/GreaseMonkey-Redirect/src/branch/main/imgur-to-rimgo.user.js)
+
 ## Install
 rimgo can run on any platform Go compiles on.
 
