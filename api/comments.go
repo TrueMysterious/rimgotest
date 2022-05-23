@@ -1,8 +1,6 @@
 package api
 
 import (
-	"io"
-	"net/http"
 	"strings"
 	"sync"
 	"time"
@@ -22,17 +20,10 @@ func FetchComments(galleryID string) ([]types.Comment, error) {
 		return cacheData.([]types.Comment), nil
 	}
 
-	res, err := http.Get("https://api.imgur.com/comment/v1/comments?client_id=" + utils.Config["imgurId"].(string) + "&filter[post]=eq:" + galleryID + "&include=account,adconfig&per_page=30&sort=best")
+	data, err := utils.GetJSON("https://api.imgur.com/comment/v1/comments?client_id=" + utils.Config["imgurId"].(string) + "&filter[post]=eq:" + galleryID + "&include=account,adconfig&per_page=30&sort=best")
 	if err != nil {
-		return []types.Comment{}, err
+		return []types.Comment{}, nil
 	}
-
-	body, err := io.ReadAll(res.Body)
-	if err != nil {
-		return []types.Comment{}, err
-	}
-
-	data := gjson.Parse(string(body))
 
 	wg := sync.WaitGroup{}
 	comments := make([]types.Comment, 0)

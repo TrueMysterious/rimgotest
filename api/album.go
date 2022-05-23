@@ -1,8 +1,6 @@
 package api
 
 import (
-	"io"
-	"net/http"
 	"strings"
 	"time"
 
@@ -20,23 +18,14 @@ func FetchAlbum(albumID string) (types.Album, error) {
 		return cacheData.(types.Album), nil
 	}
 
-	res, err := http.Get("https://api.imgur.com/post/v1/albums/" + albumID + "?client_id=" + utils.Config["imgurId"].(string) + "&include=media%2Caccount")
+	data, err := utils.GetJSON("https://api.imgur.com/post/v1/albums/" + albumID + "?client_id=" + utils.Config["imgurId"].(string) + "&include=media%2Caccount")
 	if err != nil {
 		return types.Album{}, err
 	}
 
-	body, err := io.ReadAll(res.Body)
+	album, err := ParseAlbum(data)
 	if err != nil {
 		return types.Album{}, err
-	}
-
-	data := gjson.Parse(string(body))
-
-	album := types.Album{}
-	if data.Get("shared_with_community").Bool() || res.StatusCode == 404 {
-		album, err = FetchPosts(albumID)
-	} else {
-		album, err = ParseAlbum(data)
 	}
 
 	albumCache.Set(albumID + "-album", album, cache.DefaultExpiration)
@@ -49,17 +38,11 @@ func FetchPosts(albumID string) (types.Album, error) {
 		return cacheData.(types.Album), nil
 	}
 
-	res, err := http.Get("https://api.imgur.com/post/v1/posts/" + albumID + "?client_id=" + utils.Config["imgurId"].(string) + "&include=media%2Caccount%2Ctags")
+	data, err := utils.GetJSON("https://api.imgur.com/post/v1/posts/" + albumID + "?client_id=" + utils.Config["imgurId"].(string) + "&include=media%2Caccount%2Ctags")
 	if err != nil {
 		return types.Album{}, err
 	}
 
-	body, err := io.ReadAll(res.Body)
-	if err != nil {
-		return types.Album{}, err
-	}
-
-	data := gjson.Parse(string(body))
 	album, err := ParseAlbum(data)
 	if err != nil {
 		return types.Album{}, err
@@ -75,17 +58,11 @@ func FetchMedia(mediaID string) (types.Album, error) {
 		return cacheData.(types.Album), nil
 	}
 	
-	res, err := http.Get("https://api.imgur.com/post/v1/media/" + mediaID + "?client_id=" + utils.Config["imgurId"].(string) + "&include=media%2Caccount")
+	data, err := utils.GetJSON("https://api.imgur.com/post/v1/media/" + mediaID + "?client_id=" + utils.Config["imgurId"].(string) + "&include=media%2Caccount")
 	if err != nil {
 		return types.Album{}, err
 	}
 
-	body, err := io.ReadAll(res.Body)
-	if err != nil {
-		return types.Album{}, err
-	}
-
-	data := gjson.Parse(string(body))
 	album, err := ParseAlbum(data)
 	if err != nil {
 		return types.Album{}, err

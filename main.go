@@ -44,13 +44,13 @@ func main() {
 	app.Get("/:postID.gifv", pages.HandleEmbed)
 	app.Get("/:baseName.:extension", pages.HandleMedia)
 	app.Get("/:postID", pages.HandlePost)
-	app.Get("/a/:galleryID", pages.HandleGallery)
+	app.Get("/a/:postID", pages.HandlePost)
 	app.Get("/t/:tag", pages.HandleTag)
 	app.Get("/user/:userID", pages.HandleUser)
 	app.Get("/r/:sub/:postID", pages.HandlePost)
 	app.Get("/user/:userID/cover", pages.HandleUserCover)
 	app.Get("/user/:userID/avatar", pages.HandleUserAvatar)
-	app.Get("/gallery/:galleryID", pages.HandleGallery)
+	app.Get("/gallery/:postID", pages.HandlePost)
 
 	app.Listen(":" + utils.Config["port"].(string))
 }

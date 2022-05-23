@@ -55,17 +55,10 @@ func FetchSubmissions(username string, sort string, page string) ([]types.Submis
 		return cacheData.([]types.Submission), nil
 	}
 
-	res, err := http.Get("https://api.imgur.com/3/account/" + username + "/submissions/" + page + "/" + sort + "?album_previews=1&client_id=" + utils.Config["imgurId"].(string))
+	data, err := utils.GetJSON("https://api.imgur.com/3/account/" + username + "/submissions/" + page + "/" + sort + "?album_previews=1&client_id=" + utils.Config["imgurId"].(string))
 	if err != nil {
 		return []types.Submission{}, err
 	}
-
-	body, err := io.ReadAll(res.Body)
-	if err != nil {
-		return []types.Submission{}, err
-	}
-
-	data := gjson.Parse(string(body))
 
 	submissions := []types.Submission{}
 
