@@ -32,6 +32,11 @@ func handleMedia(c *fiber.Ctx, url string) error {
 		return err
 	}
 
+	if res.StatusCode == 404 {
+		c.Status(404)
+		return c.Render("errors/404", nil)
+	}
+
 	c.Set("Content-Type", res.Header.Get("Content-Type"));
 	contentLen, _ := strconv.Atoi(res.Header.Get("Content-Length"))
 	return c.SendStream(res.Body, contentLen)

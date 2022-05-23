@@ -37,6 +37,10 @@ main {
   margin: 0 24vw;
 }
 
+.errorTitle {
+  text-align: center;
+}
+
 .posts {
   margin-top: 1em;
   display: grid;

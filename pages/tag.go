@@ -32,6 +32,10 @@ func HandleTag(c *fiber.Ctx) error {
 	if err != nil {
 		return err
 	}
+	if tag.Display == "" {
+		c.Status(404)
+		return c.Render("errors/404", nil)
+	}
 
 	return c.Render("tag", fiber.Map{
 		"tag":         tag,

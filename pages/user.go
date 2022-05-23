@@ -46,6 +46,11 @@ func HandleUser(c *fiber.Ctx) error {
 	}
 
 	wg.Wait()
+	if user.Username == "" {
+		c.Status(404)
+		return c.Render("errors/404", nil)
+	}
+
 	return c.Render("user", fiber.Map{
 		"user":        user,
 		"submissions": submissions,

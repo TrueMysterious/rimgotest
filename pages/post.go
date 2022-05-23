@@ -1,7 +1,6 @@
 package pages
 
 import (
-	"fmt"
 	"strings"
 
 	"codeberg.org/video-prize-ranch/rimgo/api"
@@ -18,14 +17,14 @@ func HandlePost(c *fiber.Ctx) error {
 	switch {
 	case strings.HasPrefix(c.Path(), "/a"):
 		post, err = api.FetchAlbum(c.Params("postID"))
-		println(post.Title)
 	case strings.HasPrefix(c.Path(), "/gallery"):
 		post, err = api.FetchPosts(c.Params("postID"))
 	default:
 		post, err = api.FetchMedia(c.Params("postID"))
 	}
-	if post.Id == "" || strings.Contains(err.Error(), "404") {
-		return fmt.Errorf("404 page not found")
+	if post.Id == "" || (err != nil && strings.Contains(err.Error(), "404")) {
+		c.Status(404)
+		return c.Render("errors/404", nil)
 	}
  	if err != nil {
 		return err
