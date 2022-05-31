@@ -56,6 +56,7 @@ Open an issue to have your instance listed here!
 | [rimgo.esmailelbob.xyz](https://rimgo.esmailelbob.xyz)     | 🇨🇦 CA   |            |
 | [rimgo.lunar.icu](https://rimgo.lunar.icu)                 | 🇩🇪 DE   | 😢         |
 | [i.actionsack.com](https://i.actionsack.com)               | 🇺🇸 US   | 😢         |
+| [rimgo.privacydev.net](https://irimgo.privacydev.net)      | 🇺🇸 US   |            |
 
 ### Tor
 
