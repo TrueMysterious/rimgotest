@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"codeberg.org/video-prize-ranch/rimgo/pages"
@@ -24,7 +25,12 @@ func main() {
 		StreamRequestBody: true,
 	})
 
-	app.Use(recover.New())
+	app.Use(recover.New(recover.Config{
+		EnableStackTrace: true,
+		StackTraceHandler: func (c *fiber.Ctx, e interface{})  {
+			fmt.Println(e)
+		},
+	}))
 	app.Use("/static", filesystem.New(filesystem.Config{
 		Root: http.FS(static.GetFiles()),
 	}))
