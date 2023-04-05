@@ -2,6 +2,7 @@
 #Rimgo
 
 <hr>
+this is just a fork that is modfied, the actual repo can be found here<a href="https://codeberg.org/video-prize-ranch/rimgo"> here</a>
 <hr>
 An alternative frontend for Imgur. Based on [rimgu](https://codeberg.org/3np/rimgu) and rewritten in Go.
 <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">
