@@ -1,6 +1,9 @@
 <img alt="" src="https://codeberg.org/video-prize-ranch/rimgo/raw/branch/main/static/img/rimgo.svg" width="96" height="96" />
 
-# rimgo  (This is a forked, actual repo is <a href="https://codeberg.org/video-prize-ranch/rimgo"> here</a> )
+# rimgo  
+<hr>
+(This is a forked, actual repo is <a href="https://codeberg.org/video-prize-ranch/rimgo"> here</a> )
+<hr>
 An alternative frontend for Imgur. Originally based on [rimgu](https://codeberg.org/3np/rimgu).
 
 <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">
