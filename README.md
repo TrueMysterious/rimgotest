@@ -1,8 +1,8 @@
 <img src="https://codeberg.org/video-prize-ranch/rimgo/raw/branch/main/static/img/rimgo.svg" width="96" height="96" />
-
-# rimgo
+<a href="https://codeberg.org/video-prize-ranch/rimgo">
+# rimgo (NOTE:this is just a fork of the actual project that I plan to modify use the actual site if you are self hosting)
 An alternative frontend for Imgur. Based on [rimgu](https://codeberg.org/3np/rimgu) and rewritten in Go.
-
+</a>
 <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">
   <img alt="License: AGPLv3" src="https://shields.io/badge/License-AGPL%20v3-blue.svg">
 </a>
