@@ -1,34 +1,25 @@
-h1 {
-  margin: 0;
-}
-
 p {
-  margin: 0.5em 0;
-}
-
-video,
-img {
-  max-width: 100%;
+  margin: 0.4rem 0;
 }
 
 .pfp {
   border-radius: 100%;
 }
 
-.imageMeta__wrapper,
-.imageMeta__item,
-.imageMeta {
-  display: flex;
-  gap: 12px;
-  align-items: center;
+.post__media video,
+.post__media img {
+  margin: 1em 0;
+  max-width: 100%;
+  max-height: 85vh;
 }
 
-.imageMeta__item {
-  gap: 4px;
+.post__media p {
+  margin-left: 1rem;
+  align-self: flex-start;
 }
 
 .imageMeta__wrapper {
-  gap: 1rem;
+  margin-top: 0.5em;
 }
 
 .user {
@@ -42,6 +33,7 @@ img {
   display: flex;
   gap: 10px;
   flex-flow: wrap;
+  margin-top: 1em;
 }
 
 .tag {

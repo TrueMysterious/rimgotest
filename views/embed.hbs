@@ -8,18 +8,40 @@
 </head>
 
 <body>
-  <video loop poster="/{{id}}.webp" autoplay width="100%">
-    <source src="/{{id}}.webm" type="video/webm" />
-    <source src="/{{id}}.mp4" type="video/mp4" />
-  </video>
-  <div class="postLink">
-    <a href="/{{id}}">
-      <img src="/static/img/rimgo.svg" width="32px" height="32px" class="logo">
-    </a>
-    <a href="/{{id}}" class="rimgoLink">
-      rimgo
-    </a>
-    <a href="/{{id}}.mp4?download=1">download</a>
+  <div class="mediaWrapper">
+    <div class="media">
+    {{#each post.Media}}
+    {{#equal this.Type "image"}}
+    <img src="{{this.Url}}" loading="lazy">
+    {{/equal}}
+    {{#equal this.Type "video"}}
+    <video controls loop>
+      <source type="{{this.MimeType}}" src="{{this.Url}}" />
+    </video>
+    {{/equal}}
+    {{/each}}
+    </div>
+  </div>
+  <div class="postMeta">
+    <div class="postDetails">
+      {{#if post.TItle}}
+      <a href="/{{post.Id}}">
+        <h3>{{post.Title}}</h3>
+      </a>
+      {{/if}}
+      <div class="views flex flex-center">
+        <img class="icon" src="/static/icons/eye.svg" alt="Views">
+        <p>{{post.Views}}</p>
+      </div>
+    </div>
+    <div class="flex flex-center">
+      <a href="/{{post.Id}}">
+        <img src="/static/img/rimgo.svg" width="32px" height="32px" class="logo">
+      </a>
+      <a href="/{{post.Id}}">
+        rimgo
+      </a>
+    </div>
   </div>
 </body>
 

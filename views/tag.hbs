@@ -6,7 +6,6 @@
 
   {{> partials/head }}
 
-  <link rel="stylesheet" href="/static/fonts/Material-Icons-Outlined.css" />
   <link rel="stylesheet" href="/static/css/base.css" />
   <link rel="stylesheet" href="/static/css/tag.css" />
 </head>
@@ -16,11 +15,11 @@
 
   <main>
     <div class="tagMeta" style="background-image: url('{{tag.Background}}');">
-      <div class="tagMeta__info">
+      <div class="flex flex-center flex-col text-center">
         <h2>{{tag.Display}}</h2>
         <p>{{tag.PostCount}} posts</p>
       </div>
-      <div class="tagMeta__sort">
+      <div class="flex flex-col gap-2">
         {{#equal tag.Sort "popular"}}
         <a href="?sort=popular"><b>Popular</b></a>
         <a href="?sort=newest">Newest</a>

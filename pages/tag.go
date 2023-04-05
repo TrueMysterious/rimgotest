@@ -3,15 +3,15 @@ package pages
 import (
 	"strconv"
 
-	"codeberg.org/video-prize-ranch/rimgo/api"
 	"codeberg.org/video-prize-ranch/rimgo/utils"
 	"github.com/gofiber/fiber/v2"
 )
 
 func HandleTag(c *fiber.Ctx) error {
 	utils.SetHeaders(c)
+	c.Set("X-Frame-Options", "DENY")
 	c.Set("Cache-Control", "public,max-age=604800")
-	c.Set("Content-Security-Policy", "default-src 'none'; style-src 'unsafe-inline' 'self'; img-src 'self'; font-src 'self'; manifest-src 'self'; block-all-mixed-content")
+	c.Set("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'; style-src 'unsafe-inline' 'self'; media-src 'self'; img-src 'self'; manifest-src 'self'; block-all-mixed-content")
 
 	page := "1"
 	if c.Query("page") != "" {
@@ -28,13 +28,15 @@ func HandleTag(c *fiber.Ctx) error {
 		displayPrevPage = false
 	}
 
-	tag, err := api.FetchTag(c.Params("tag"), c.Query("sort"), page)
+	tag, err := ApiClient.FetchTag(c.Params("tag"), c.Query("sort"), page)
+	if err != nil && err.Error() == "ratelimited by imgur" {
+		return c.Status(429).Render("errors/429", nil)
+	}
 	if err != nil {
 		return err
 	}
 	if tag.Display == "" {
-		c.Status(404)
-		return c.Render("errors/404", nil)
+		return c.Status(404).Render("errors/404", nil)
 	}
 
 	return c.Render("tag", fiber.Map{

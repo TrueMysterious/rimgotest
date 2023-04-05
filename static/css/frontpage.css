@@ -1,8 +1,13 @@
+h1, h2, h3 {
+  margin: 0.4em 0;
+}
+
 code {
-  background-color: #424242;
-  padding: 2px;
+  padding: 0.15rem;
+  font-size: 0.95em;
+  background-color: #383838;
   border-radius: 4px;
-  font-size: 0.9em;
+  font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
 }
 
 summary {

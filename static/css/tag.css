@@ -1,4 +1,4 @@
-main {
+body {
   margin: 0 12vw;
 }
 
@@ -7,22 +7,7 @@ main {
   border-radius: 12px;
 }
 
-.tagMeta__info {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-}
-
-.tagMeta__sort {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.tagMeta__sort a {
+a {
   font-weight: 400;
   color: #fff;
 }

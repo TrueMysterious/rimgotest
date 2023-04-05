@@ -1,20 +1,10 @@
-main {
+body {
   margin: 0 12vw;
 }
 
 .userMeta {
   padding: 2em;
   border-radius: 12px;
-}
-
-.userMeta__upper {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.userMeta__upper__bio {
-  margin-top: 1em;
 }
 
 .pfp {

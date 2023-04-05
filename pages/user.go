@@ -2,18 +2,16 @@ package pages
 
 import (
 	"strconv"
-	"sync"
 
-	"codeberg.org/video-prize-ranch/rimgo/api"
-	"codeberg.org/video-prize-ranch/rimgo/types"
 	"codeberg.org/video-prize-ranch/rimgo/utils"
 	"github.com/gofiber/fiber/v2"
 )
 
 func HandleUser(c *fiber.Ctx) error {
 	utils.SetHeaders(c)
+	c.Set("X-Frame-Options", "DENY")
 	c.Set("Cache-Control", "public,max-age=604800")
-	c.Set("Content-Security-Policy", "default-src 'none'; media-src 'self'; style-src 'unsafe-inline' 'self'; img-src 'self'; font-src 'self'; manifest-src 'self'; block-all-mixed-content")
+	c.Set("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'; media-src 'self'; style-src 'unsafe-inline' 'self'; img-src 'self'; manifest-src 'self'; block-all-mixed-content")
 
 	page := "0"
 	if c.Query("page") != "" {
@@ -25,30 +23,24 @@ func HandleUser(c *fiber.Ctx) error {
 		pageNumber = 0
 	}
 
-	wg := sync.WaitGroup{}
-	wg.Add(2)
-	user, err := types.User{}, error(nil)
-	go func() {
-		defer wg.Done()
-		user, err = api.FetchUser(c.Params("userID"))
-	}()
+	user, err := ApiClient.FetchUser(c.Params("userID"))
+	if err != nil && err.Error() == "ratelimited by imgur" {
+		return c.Status(429).Render("errors/429", nil)
+	}
 	if err != nil {
 		return err
 	}
-
-	submissions, err := []types.Submission{}, error(nil)
-	go func() {
-		defer wg.Done()
-		submissions, err = api.FetchSubmissions(c.Params("userID"), "newest", page)
-	}()
-	if err != nil {
-		return err
-	}
-
-	wg.Wait()
 	if user.Username == "" {
-		c.Status(404)
-		return c.Render("errors/404", nil)
+		return c.Status(404).Render("errors/404", nil)
+	}
+
+	submissions, err := ApiClient.FetchSubmissions(c.Params("userID"), "newest", page)
+	if err != nil && err.Error() == "ratelimited by imgur" {
+		c.Status(429)
+		return c.Render("errors/429", nil)
+	}
+	if err != nil {
+		return err
 	}
 
 	return c.Render("user", fiber.Map{

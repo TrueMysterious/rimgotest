@@ -1,13 +1,10 @@
 .comment {
-  display: flex;
-  flex-direction: column;
   gap: 0.5em;
 }
 
 .comments {
+  margin-top: 1em;
   gap: 0.25em;
-  display: flex;
-  flex-direction: column;
 }
 
 .replies {
@@ -36,11 +33,11 @@
 }
 
 #comments__expandBtn ~ .comments__expandBtn__label > span::after {
-  content: "expand_more";
+  content: "⌄";
 }
 
 #comments__expandBtn:checked ~ .comments__expandBtn__label > span::after {
-  content: "expand_less";
+  content: "⌃";
 }
 
 #comments__expandBtn:checked ~ .comments {
@@ -48,7 +45,9 @@
 }
 
 .comment__media {
-  display: inline;
+  height: 10em;
+  display: block;
+  margin: 0.5em 0;
 }
 
 .comment__updatedDate {

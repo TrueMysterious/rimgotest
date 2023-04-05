@@ -5,29 +5,34 @@ import (
 	"net/http"
 	"strings"
 	"sync"
-	"time"
-
-	"codeberg.org/video-prize-ranch/rimgo/types"
-	"codeberg.org/video-prize-ranch/rimgo/utils"
+	
 	"github.com/patrickmn/go-cache"
 	"github.com/tidwall/gjson"
 )
 
-var tagCache = cache.New(15*time.Minute, 15*time.Minute)
+type Tag struct {
+	Tag          string
+	Display      string
+	Sort         string
+	PostCount    int64
+	Posts        []Submission
+	Background   string
+	BackgroundId string
+}
 
-func FetchTag(tag string, sort string, page string) (types.Tag, error) {
-	cacheData, found := tagCache.Get(tag + sort + page)
+func (client *Client) FetchTag(tag string, sort string, page string) (Tag, error) {
+	cacheData, found := client.Cache.Get(tag + sort + page + "-tag")
 	if found {
-		return cacheData.(types.Tag), nil
+		return cacheData.(Tag), nil
 	}
 
 	req, err := http.NewRequest("GET", "https://api.imgur.com/post/v1/posts/t/"+tag, nil)
 	if err != nil {
-		return types.Tag{}, err
+		return Tag{}, err
 	}
 
 	q := req.URL.Query()
-	q.Add("client_id", utils.Config["imgurId"].(string))
+	q.Add("client_id", client.ClientID)
 	q.Add("include", "cover")
 	q.Add("page", page)
 
@@ -49,32 +54,32 @@ func FetchTag(tag string, sort string, page string) (types.Tag, error) {
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
-		return types.Tag{}, err
+		return Tag{}, err
 	}
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		return types.Tag{}, err
+		return Tag{}, err
 	}
 
 	data := gjson.Parse(string(body))
 
 	wg := sync.WaitGroup{}
-	posts := make([]types.Submission, 0)
+	posts := make([]Submission, 0)
 	data.Get("posts").ForEach(
 		func(key, value gjson.Result) bool {
 			wg.Add(1)
 
 			go func() {
 				defer wg.Done()
-				posts = append(posts, types.Submission{
+				posts = append(posts, Submission{
 					Id:    value.Get("id").String(),
 					Title: value.Get("title").String(),
 					Link:  strings.ReplaceAll(value.Get("url").String(), "https://imgur.com", ""),
-					Cover: types.Media{
-						Id:  value.Get("cover_id").String(),
+					Cover: Media{
+						Id:   value.Get("cover_id").String(),
 						Type: value.Get("cover.type").String(),
-						Url: strings.ReplaceAll(value.Get("cover.url").String(), "https://i.imgur.com", ""),
+						Url:  strings.ReplaceAll(value.Get("cover.url").String(), "https://i.imgur.com", ""),
 					},
 					Points:    value.Get("point_count").Int(),
 					Upvotes:   value.Get("upvote_count").Int(),
@@ -91,15 +96,15 @@ func FetchTag(tag string, sort string, page string) (types.Tag, error) {
 
 	wg.Wait()
 
-	tagData := types.Tag{
-		Tag: tag,
-		Display: data.Get("display").String(),
-		Sort: sort,
-		PostCount: data.Get("post_count").Int(),
-		Posts: posts,
-		Background: "/" + data.Get("background_id").String() + ".webp",
+	tagData := Tag{
+		Tag:          tag,
+		Display:      data.Get("display").String(),
+		Sort:         sort,
+		PostCount:    data.Get("post_count").Int(),
+		Posts:        posts,
+		Background:   "/" + data.Get("background_id").String() + ".webp",
 	}
 
-	tagCache.Set(tag, tagData, cache.DefaultExpiration)
+	client.Cache.Set(tag + sort + page + "-tag", tagData, cache.DefaultExpiration)
 	return tagData, nil
 }
