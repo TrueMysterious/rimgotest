@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>{{user.Username}} - rimgo</title>
+
+  {{> partials/head }}
+
+  <link rel="stylesheet" href="/static/css/user.css" />
+
+</head>
+
+<body>
+  {{> partials/header }}
+
+  <main>
+    <div class="userMeta" style="background-image: url('{{user.Cover}}');">
+      <div class="flex flex-center-y gap-2">
+        <img class="pfp" src="{{user.Avatar}}" width="72" height="72">
+        <div>
+          <h2>{{user.Username}}</h2>
+          <p>{{user.Points}} pts · {{user.CreatedAt}}</p>
+        </div>
+      </div>
+      <p>{{user.Bio}}</p>
+    </div>
+
+    <div class="posts">
+      {{#each submissions}}
+      {{> partials/post }}
+      {{/each}}
+    </div>
+
+    <div class="pageSelector">
+      {{#equal page "0" }}
+      {{else}}
+      <a href="{{channel.RelUrl}}?page={{prevPage}}">Previous page</a>
+      {{/equal}}
+      <a href="{{channel.RelUrl}}?page={{nextPage}}">Next page</a>
+    </div>
+  </main>
+
+  {{> partials/footer }}
+</body>
+
+</html>

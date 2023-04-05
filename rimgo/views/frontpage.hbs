@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>rimgo</title>
+
+  {{> partials/head }}
+
+  <link rel="stylesheet" href="/static/css/frontpage.css" />
+
+</head>
+
+<body>
+  {{> partials/header }}
+
+  <main>
+    <p>An alternative frontend for Imgur. Originally based on <a href="https://codeberg.org/3np/rimgu" rel="noreferrer">rimgu</a>.</p>
+
+    <h2>Features</h2>
+    <ul>
+      <li>Lightweight</li>
+      <li>No JavaScript</li>
+      <li>No ads or tracking</li>
+      <li>No sign up or app install prompts</li>
+      <li>Bandwidth efficient - automatically uses newer image formats (if enabled)</li>
+    </ul>
+
+    <h2>Comparison</h2>
+    <p>Comparing rimgo to Imgur.</p>
+
+    <h3>Speed</h3>
+    <p>Tested using <a href="https://pagespeed.web.dev/" rel="nofollow noreferrer">Google PageSpeed Insights</a>.</p>
+    <table>
+      <tr>
+        <td></td>
+        <td><a href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fi.bcow.xyz%2Fgallery%2FgYiQLWy" rel="nofollow noreferrer">rimgo</a></td>
+        <td><a href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fimgur.com%2Fgallery%2FgYiQLWy" rel="nofollow noreferrer">Imgur</a></td>
+      </tr>
+      <tr>
+        <td>Performance</td>
+        <td>91</td>
+        <td>28</td>
+      </tr>
+      <tr>
+        <td>Request count</td>
+        <td>29</td>
+        <td>340</td>
+      </tr>
+      <tr>
+        <td>Resource Size</td>
+        <td>218 KiB</td>
+        <td>2,542 KiB</td>
+      </tr>
+      <tr>
+        <td>Time to Interactive</td>
+        <td>1.6s</td>
+        <td>23.8s</td>
+      </tr>
+    </table>
+
+    <h3>Privacy</h3>
+    <p>Imgur collects information about your device and uses tracking cookies for advertising, this is mentioned in their <a href="https://imgur.com/privacy/" rel="nofollow noreferrer">privacy policy</a>. <a href="https://themarkup.org/blacklight" rel="nofollow noreferrer">Blacklight</a> found 31 trackers and 87 third-party cookies.</p>
+    <p>See what cookies and trackers Imgur uses and where your data gets sent: <a href="https://themarkup.org/blacklight?url=imgur.com" rel="nofollow noreferrer">https://themarkup.org/blacklight?url=imgur.com</a></p>
+
+    <h2>Usage</h2>
+    <p>Just replace imgur.com or i.imgur.com with <code>{{domain}}</code> (add stack/ before the media ID for i.stack.imgur.com). You can setup automatic redirects using <a href="https://github.com/libredirect/libredirect" rel="nofollow noreferrer">LibRedirect</a> (recommended) or <a href="https://github.com/einaregilsson/Redirector" rel="nofollow noreferrer">Redirector</a>.</p>
+
+    {{#if force_webp}}
+    <p>To download images as their original filetype, add <code>?no_webp=1</code> to the end of the image URL.</p>
+    {{/if}}
+
+    <h2>Automatically redirect links</h2>
+    
+    <h3>LibRedirect</h3>
+    <p>Use <a href="https://github.com/libredirect/libredirect" rel="nofollow noreferrer">LibRedirect</a> to automatically redirect Imgur links to rimgo!</p>
+
+    <h3>GreaseMonkey script</h3>
+    <p>There is a script to redirect Imgur links to rimgo. <a rel="noreferrer" href="https://codeberg.org/zortazert/GreaseMonkey-Redirect/src/branch/main/imgur-to-rimgo.user.js">https://codeberg.org/zortazert/GreaseMonkey-Redirect/src/branch/main/imgur-to-rimgo.user.js</a></p>
+
+    <h3>Redirector</h3>
+    <p>You can use the <a href="https://github.com/einaregilsson/Redirector" rel="nofollow noreferrer">Redirector</a> extension to redirect Imgur links to rimgo with the configuration below:</p>
+    <ul>
+      <li>Description: Imgur -> rimgo</li>
+      <li>Example URL: https://imgur.com/a/H8M4rcp</li>
+      <li>Include pattern: <code>^https?://i?.?imgur.com(/.*)?$</code></li>
+      <li>Redirect to: <code>{{proto}}://{{domain}}$1</code></li>
+      <li>Pattern type: Regular Expression</li>
+      <li>Advanced Options > Apply to: Check Images</li>
+    </ul>
+
+    <p>For Stack Overflow Images:</p>
+    <ul>
+      <li>Description: Stack Overflow Imgur -> rimgo</li>
+      <li>Example URL: https://i.stack.imgur.com/BTKqD.png?s=128&g=1</li>
+      <li>Include pattern: <code>^https?://i\.stack\.imgur\.com(/.*)?$</code></li>
+      <li>Redirect to: <code>{{proto}}://{{domain}}/stack$1</code></li>
+      <li>Pattern type: Regular Expression</li>
+      <li>Advanced Options > Apply to: Check Images</li>
+    </ul>
+
+    <h2>Notice</h2>
+    <p>All images and media are from Imgur. rimgo does not allow uploads or comments. Any issues with content should be reported to Imgur.</p>
+  </main>
+
+  {{> partials/footer }}
+</body>
+
+</html>

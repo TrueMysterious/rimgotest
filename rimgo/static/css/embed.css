@@ -1,0 +1,54 @@
+.logo {
+  filter: invert(180deg), hue-rotate(180deg);
+}
+
+body {
+  overflow: hidden;
+}
+
+.mediaWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.media {
+  display: flex;
+  overflow: auto;
+  gap: 1rem;
+  align-items: center;
+  height: 90vh;
+}
+
+.media img, .media video {
+  height: 100%;
+}
+
+.media--gifv {
+  width: 100vw;
+  overflow: unset;
+  justify-content: center;
+}
+
+.media--gifv video {
+  width: 100%;
+}
+
+.views {
+  gap: 4px;
+}
+
+.postDetails {
+  display: flex;
+  gap: 1rem;
+}
+
+h3 {
+  font-size: 1em;
+}
+
+.postMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 9vh;
+}

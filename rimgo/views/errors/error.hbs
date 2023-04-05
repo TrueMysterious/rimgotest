@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {{> 'partials/head' }}
+
+  <link rel="stylesheet" href="/static/css/error.css" />
+
+  <title>Error - rimgo</title>
+</head>
+
+<body>
+  {{> 'partials/header' }}
+
+  <main>
+    <h2 class="errorTitle">An error occurred</h2>
+    <p>You may have found a bug in rimgo. If this is a bug, open an issue on <a href="https://codeberg.org/video-prize-ranch/rimgo/issues/new">Codeberg</a>.</p>
+    <code>{{err}}</code>
+  </main>
+
+</body>
+
+</html>

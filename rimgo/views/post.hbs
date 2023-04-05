@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>
+    {{#if post.Title}}
+    {{post.Title}} - 
+    {{/if}}
+    rimgo
+    </title>
+
+  {{> partials/head }}
+
+  <link rel="stylesheet" href="/static/css/album.css" />
+  <link rel="stylesheet" href="/static/css/comments.css" />
+
+</head>
+
+<body>
+  {{> partials/header }}
+
+  <header>
+    <h1>{{post.Title}}</h1>
+    <p>{{post.CreatedAt}}</p>
+  </header>
+  
+  <main>
+    <div class="flex flex-center-y gap-4">
+      {{#if post.User.Username}}
+      <a href="/user/{{post.User.Username}}" class="user">
+        <img src="{{post.User.Avatar}}" class="pfp" width="36" height="36" />
+        <p>
+          <b>{{post.User.Username}}</b>
+        </p>
+      </a>
+      {{/if}}
+      <div class="flex flex-center-y gap-2">
+        <div class="flex flex-center gap-2">
+          <img class="icon" src="/static/icons/eye.svg" alt="Views">
+          <p>{{post.Views}}</p>
+        </div>
+        {{#if post.SharedWithCommunity}}
+        <div class="flex flex-center gap-2">
+          <img class="icon" src="/static/icons/chevron-up.svg" alt="Likes">
+          <p>{{post.Upvotes}}</p>
+        </div>
+        <div class="flex flex-center gap-2">
+          <img class="icon" src="/static/icons/chevron-down.svg" alt="Dislikes">
+          <p>{{post.Downvotes}}</p>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+
+    <div class="post__media flex flex-center flex-col">
+      {{#each post.Media}}
+      {{#if this.Title}}
+      <h4>{{this.Title}}</h4>
+      {{/if}}
+
+      {{#equal this.Type "image"}}
+      <img src="{{this.Url}}" loading="lazy">
+      {{/equal}}
+      {{#equal this.Type "video"}}
+      <video controls loop>
+        <source type="{{this.MimeType}}" src="{{this.Url}}" />
+      </video>
+      {{/equal}}
+
+      {{#if this.Description}}
+      <p>{{{this.Description}}}</p>
+      {{/if}}
+    {{/each}}
+    </div>
+
+    {{#if post.tags}}
+    <div class="tags">
+      <style nonce="{{nonce}}">
+        {{#each post.tags}}
+          .{{this.BackgroundId}} { background-image: url('{{this.Background}}') }
+        {{/each}}	      
+      </style>
+      {{#each post.tags}}
+      <a href="/t/{{this.Tag}}">
+        <div class="tag {{this.BackgroundId}}">
+          <p class="tag__display">{{this.Display}}</p>
+        </div>
+      </a>
+      {{/each}}
+    </div>
+    {{/if}}
+  </main>
+
+  <section>
+    {{#if comments}}
+    <div>
+      <hr>
+      <input id="comments__expandBtn" type="checkbox">
+      <label class="comments__expandBtn__label" for="comments__expandBtn">
+        <h3>Comments ({{post.Comments}})</h3>
+        <span class="comments__expandBtn__icon"></span>
+      </label>
+      <div class="comments flex flex-col">
+        {{#each comments}}
+        {{> partials/comment }}
+        {{/each}}
+      </div>
+    </div>
+    {{/if}}
+  </section>
+
+  {{> partials/footer }}
+</body>
+
+</html>

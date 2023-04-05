@@ -1,0 +1,13 @@
+body {
+  margin: 0 12vw;
+}
+
+.tagMeta {
+  padding: 2em;
+  border-radius: 12px;
+}
+
+a {
+  font-weight: 400;
+  color: #fff;
+}

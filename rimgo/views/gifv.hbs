@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {{> partials/head }}
+
+  <link rel="stylesheet" href="/static/css/embed.css" />
+</head>
+
+<body>
+  <div class="mediaWrapper">
+    <div class="media media--gifv">
+      <video loop poster="/{{id}}.webp" autoplay controls>
+        <source src="/{{id}}.webm" type="video/webm" />
+        <source src="/{{id}}.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+  <div class="postMeta">
+    <a href="/{{id}}.mp4" download="{{id}}.mp4">download</a>
+    <div class="flex flex-center">
+      <a href="/{{post.Id}}">
+        <img src="/static/img/rimgo.svg" width="32px" height="32px" class="logo">
+      </a>
+      <a href="/{{post.Id}}">
+        rimgo
+      </a>
+    </div>
+  </div>
+</body>
+
+</html>

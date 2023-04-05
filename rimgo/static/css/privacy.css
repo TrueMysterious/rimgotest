@@ -1,0 +1,44 @@
+p {
+  margin: 1em 0
+}
+
+h1, h2, h3 {
+  margin: 0.4em 0;
+}
+
+ul {
+  list-style: outside none none;
+  padding: 0;
+  margin: 0.25em;
+  text-align: left;
+}
+
+.largeIcon {
+  height: 36px;
+}
+
+.badge {
+  margin: 0 10vw
+}
+
+.badge div {
+  background-color: #3b3b3b;
+  border-radius: 8px;
+}
+
+.badge h2 {
+  font-size: 1.35rem;
+}
+
+.badge h2,
+.badge p,
+.largeIcon {
+  margin: 0;
+}
+
+.privacyDetails summary {
+  cursor: pointer;
+  user-select: none;
+  color: #2b95f2;
+  font-weight: 700;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>{{tag.Display}} - rimgo</title>
+
+  {{> partials/head }}
+
+  <link rel="stylesheet" href="/static/css/base.css" />
+  <link rel="stylesheet" href="/static/css/tag.css" />
+</head>
+
+<body>
+  {{> partials/header }}
+
+  <main>
+    <div class="tagMeta" style="background-image: url('{{tag.Background}}');">
+      <div class="flex flex-center flex-col text-center">
+        <h2>{{tag.Display}}</h2>
+        <p>{{tag.PostCount}} posts</p>
+      </div>
+      <div class="flex flex-col gap-2">
+        {{#equal tag.Sort "popular"}}
+        <a href="?sort=popular"><b>Popular</b></a>
+        <a href="?sort=newest">Newest</a>
+        <a href="?sort=best">Best</a>
+        {{/equal}}
+        {{#equal tag.Sort "newest"}}
+        <a href="?sort=popular">Popular</a>
+        <a href="?sort=newest"><b>Newest</b></a>
+        <a href="?sort=best">Best</a>
+        {{/equal}}
+        {{#equal tag.Sort "best"}}
+        <a href="?sort=popular">Popular</a>
+        <a href="?sort=newest">Newest</a>
+        <a href="?sort=best"><b>Best</b></a>
+        {{/equal}}
+      </div>
+    </div>
+
+    <div class="posts">
+      {{#each tag.Posts}}
+      {{> partials/post }}
+      {{/each}}
+    </div>
+
+    <div class="pageSelector">
+      {{#if displayPrev}}
+      <a href="{{channel.RelUrl}}?page={{prevPage}}">Previous page</a>
+      {{/if}}
+      <a href="{{channel.RelUrl}}?page={{nextPage}}">Next page</a>
+    </div>
+  </main>
+
+  {{> partials/footer }}
+</body>
+
+</html>

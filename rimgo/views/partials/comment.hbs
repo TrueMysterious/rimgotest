@@ -1,0 +1,30 @@
+<div class="comment flex flex-col">
+  <div class="comment__user">
+    {{#noteq this.User.Username "[deleted]"}}
+    <img src="{{this.User.Avatar}}" class="pfp" width="24" height="24" loading="lazy">
+    <a href="/user/{{this.User.Username}}">
+      <p class="comment__user__username"><b>{{this.User.Username}}</b></p>
+    </a>
+    {{/noteq}}
+    {{#equal this.User.Username "[deleted]"}}
+    <p class="comment__user__username"><b>[deleted]</b></p>
+    {{/equal}}
+  </div>
+  <div>
+    <p>{{{this.Comment}}}</p>
+    <div>
+      <span title="{{this.CreatedAt}}">{{this.RelTime}}</span>
+      {{#if this.DeletedAt}}
+      <span class="comment__updatedDate">(deleted {{this.DeletedAt}})</span>
+      {{/if}}
+      |
+      <img class="icon" src="/static/icons/chevron-up.svg" alt="Likes"> {{this.Upvotes}}
+      <img class="icon" src="/static/icons/chevron-down.svg" alt="Dislikes"> {{this.Downvotes}}
+    </div>
+  </div>
+  <div class="replies">
+    {{#each this.Comments}}
+    {{> partials/comment }}
+    {{/each}}
+  </div>
+</div>

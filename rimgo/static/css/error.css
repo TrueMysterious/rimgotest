@@ -1,0 +1,18 @@
+h2, p {
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 0;
+}
+
+code {
+  display: block;
+  padding: 0.75em;
+  background-color: #383838;
+  width: 90%;
+  margin: 0.75em 0;
+  word-wrap: break-word;
+  border-radius: 4px;
+  font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+}

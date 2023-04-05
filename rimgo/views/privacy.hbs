@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {{> 'partials/head' }}
+
+  <link rel="stylesheet" href="/static/css/privacy.css">
+
+  <title>Instance privacy - rimgo</title>
+</head>
+
+<body>
+  {{> 'partials/header' }}
+
+  <main>
+    <h1>Instance Privacy</h1>
+    {{#if config.Privacy.policy}}
+    <p>The instance operator has indicated their instance's privacy practices below. For more information, see the
+      instance operator's <a href="{{config.Privacy.policy}}">privacy policy</a>.</p>
+    {{else}}
+    <p>The instance operator has indicated their instance's privacy practices below.</p>
+    {{/if}}
+
+    {{#if config.Privacy.message}}
+    <p>{{{config.Privacy.message}}}</p>
+    {{/if}}
+
+    {{#if config.Privacy.not_collected}}
+    <div class="badge">
+      <div class="flex flex-col flex-center p-2 gap-2">
+        <img class="icon largeIcon" src="/static/icons/check-circle.svg" alt="">
+        <h2>Data Not Collected</h2>
+        <p>The instance operator does not collect any data from this instance.</p>
+      </div>
+    </div>
+    {{/if}}
+
+    {{#unless config.Privacy.set}}
+    <div class="badge">
+      <div class="flex flex-col flex-center p-2 gap-2">
+        <img class="icon largeIcon" src="/static/icons/alert-triangle.svg" alt="">
+        <h3>No Details Provided</h3>
+        <p>The operator of this instance will be required to provide privacy details to be added to the instance list.
+        </p>
+      </div>
+    </div>
+    {{else}}
+    {{#unless config.Privacy.not_collected}}
+    <div class="badge">
+      <div class="flex flex-col flex-center p-2 gap-2">
+        <img class="icon largeIcon" src="/static/icons/alert-circle.svg" alt="">
+        <h2>Data Collected</h2>
+        <p>The following data may be collected:</p>
+        <ul>
+          {{#if config.Privacy.ip}}
+          <li>
+            <img class="icon" src="/static/icons/hash.svg" alt="">
+            Internet address (IP Address)
+          </li>
+          {{/if}}
+          {{#if config.Privacy.url}}
+          <li>
+            <img class="icon" src="/static/icons/link.svg" alt="">
+            Page viewed (Request URL)
+          </li>
+          {{/if}}
+          {{#if config.Privacy.device}}
+          <li>
+            <img class="icon" src="/static/icons/smartphone.svg" alt="">
+            Device Type (User agent)
+          </li>
+          {{/if}}
+          {{#if config.Privacy.diagnostics}}
+          <li>
+            <img class="icon" src="/static/icons/tool.svg" alt="">
+            Diagnostics
+          </li>
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+    {{/unless}}
+    {{/unless}}
+
+    <details class="privacyDetails">
+      <summary>What's this?</summary>
+      <p>
+        Instance privacy aims to bring transparency to the data collected by frontends and encourage privacy friendly practices. There is often no privacy policy and users are forced to trust that the instance operator is not collecting data. However, there is a possibility that the instance operator can put false information so we encourage looking at other factors when selecting an instance.
+      </p>
+      <ul>
+        <li>
+          <img class="icon" src="/static/icons/hash.svg" alt="">
+          Internet address (IP Address) - This is an address that is given to your computer or internet connection.
+          This can be used to find your city or region and internet provider but can change depending on your connection.
+        </li>
+        <li>
+          <img class="icon" src="/static/icons/link.svg" alt="">
+          Page viewed (Request URL) - This is what page you are viewing. Searches are kept private.
+        </li>
+        <li>
+          <img class="icon" src="/static/icons/smartphone.svg" alt="">
+          Device Type (User agent) - This is what browser, device, and operating system you are using.
+          Advanced users can change this with an extension or browser setting.
+        </li>
+        <li>
+          <img class="icon" src="/static/icons/tool.svg" alt="">
+          Diagnostics - When this data is only collected when there is an error or only a short amount of time while
+          diagnosing an issue.
+        </li>
+      </ul>
+    </details>
+
+    <h2 class="addInfo">Additional information</h2>
+    <ul>
+      <li>Version: {{version}}</li>
+      <li>Country: {{config.Privacy.country}}</li>
+      <li>Provider: {{config.Privacy.provider}}</li>
+      {{#if config.Privacy.cloudflare}}
+      <li>Using Cloudflare?: Yes</li>
+      {{else}}
+      <li>Using Cloudflare?: No</li>
+      {{/if}}
+    </ul>
+  </main>
+
+  {{> 'partials/footer' }}
+</body>
+
+</html>
